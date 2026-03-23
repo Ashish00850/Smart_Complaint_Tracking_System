@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+    <div class="navbar">
+
+        <h2 class="logo">Smart Complaint And Issue Tracking System</h2>
+
+        <ul>
+
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+
+        </ul>
+
+    </div>
+
+    <h1>Welcome to Smart Complaint and Issue Tracking System</h1>
+
+    <h2>Student Login</h2>
+
+    <form action="/login" method="POST">
+
+        <label>Email</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Password</label><br>
+        <input type="password" name="password" required><br><br>
+
+        <button type="submit">Student Login</button>
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </form>
+
+    <br><br>
+
+    <h2>Admin Login</h2>
+
+    <a href="/admin_login">
+        <button>Admin Login</button>
+    </a>
+
+    <br><br>
+
+    <p>Don't have an account?</p>
+
+    <a href="/register">
+        <button>Register Here</button>
+    </a>
+<footer class="footer">
+<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+<p>Email: support@complaintsystem.com</p>
+</footer>
+</body>
+
+</html>

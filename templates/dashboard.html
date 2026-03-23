@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <div class="navbar">
+
+<h2 class="logo">Smart Complaint And Issue Tracking System</h2>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+
+</ul>
+
+</div>
+<h2>Welcome, {{ name }}</h2>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color:green; font-weight:bold;">
+        {{ message }}
+      </p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<br>
+
+<a href="/complaint">
+<button>Submit a Complaint</button>
+</a>
+
+<br><br>
+
+<a href="/view_complaints">
+<button>View My Complaints</button>
+</a>
+
+<br><br>
+
+
+<br><br>
+
+<a href="/logout">
+<button>Logout</button>
+</a>
+<footer class="footer">
+<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+<p>Email: support@complaintsystem.com</p>
+</footer>
+</body>
+</html>

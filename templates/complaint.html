@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Submit Complaint</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="navbar">
+
+<h2 class="logo">Smart Complaint System</h2>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+
+</ul>
+
+</div>
+
+    <h2>Submit Complaint</h2>
+
+    <form action="/submit_complaint" method="POST">
+        <label>Category</label><br>
+        <select name="category" required>
+            <option value="Internet">Internet</option>
+            <option value="Electricity">Electricity</option>
+            <option value="Hostel">Hostel</option>
+            <option value="Library">Library</option>
+            <option value="Transport">Transport</option>
+            <option value="Academics">Academics</option>
+            <option value="Sports">Sports</option>
+            <option value="faculty">faculty</option>
+            <option value="Other">Other</option>
+
+        </select>
+
+        <br><br>
+
+        <label>Subject</label><br>
+        <input type="text" name="subject" required><br><br>
+
+        <label>Description</label><br>
+        <textarea name="description" required></textarea><br><br>
+
+        <button type="submit">Submit Complaint</button>
+
+    </form>
+
+    <br>
+
+    <a href="/dashboard">
+        <button>Back to Dashboard</button>
+    </a>
+<footer class="footer">
+<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+<p>Email: support@complaintsystem.com</p>
+</footer>
+</body>
+
+</html>

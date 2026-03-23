@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>My Complaints</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<h2>My Complaints</h2>
+
+<table border="1">
+
+<tr>
+<th>ID</th>
+<th>Name</th>
+<th>Category</th>
+<th>Subject</th>
+<th>Description</th>
+<th>Admin Reply</th>
+<th>Status</th>
+</tr>
+
+{% for complaint in complaints %}
+
+<tr>
+
+<td>{{ complaint[0] }}</td>
+<td>{{ complaint[1] }}</td>
+<td>{{ complaint[3] }}</td>
+<td>{{ complaint[4] }}</td>
+<td>{{ complaint[5] }}</td>
+<td>{{ complaint[8] }}</td>
+
+<td>
+
+{% if complaint[6] == "Pending" %}
+<span style="color:red;">Pending</span>
+
+{% else %}
+<span style="color:green;">Resolved</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/dashboard">
+<button>Back to Dashboard</button>
+</a>
+<footer class="footer">
+<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+<p>Email: support@complaintsystem.com</p>
+</footer>
+</body>
+</html>

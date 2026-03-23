@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="navbar">
+
+<h2 class="logo">Smart Complaint System</h2>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+<li><a href="/about">About</a></li>
+<li><a href="/contact">Contact</a></li>
+
+</ul>
+
+</div>
+
+    <h2>Admin Dashboard</h2>
+
+    <form method="GET" action="/admin_dashboard">
+
+        <input type="text" name="search" placeholder="Search complaint">
+        <button type="submit">Search</button>
+
+    </form>
+
+    <br>
+
+    <table border="1">
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Subject</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Action</th>
+        </tr>
+
+        {% for complaint in complaints %}
+
+        <tr>
+
+            <td>{{ complaint[0] }}</td>
+            <td>{{ complaint[1] }}</td>
+            <td>{{ complaint[2] }}</td>
+            <td>{{ complaint[3] }}</td>
+            <td>{{ complaint[4] }}</td>
+            <td>{{ complaint[5] }}</td>
+            <td>{{ complaint[6] }}</td>
+            <td>{{ complaint[7] }}</td>
+
+            <td>
+
+                {% if complaint[6] == "Pending" %}
+
+                <a href="/reply/{{ complaint[0] }}" onclick="return confirmResolve()">
+                    <button>Resolve & Reply</button>
+                </a>
+
+                {% else %}
+
+                Resolved
+
+                {% endif %}
+
+            </td>
+
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    <br><br>
+
+    <a href="/admin_logout">
+        <button>Logout</button>
+    </a>
+
+    <script>
+
+        function confirmResolve() {
+            return confirm("Are you sure you want to resolve this complaint?");
+        }
+
+    </script>
+    <footer class="footer">
+<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+<p>Email: support@complaintsystem.com</p>
+</footer>
+</body>
+
+</html>
