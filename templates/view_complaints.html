@@ -2,63 +2,94 @@
 <html>
 
 <head>
-<title>My Complaints</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+     <title>My Complaints</title>
+     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
+     <div class="navbar">
 
-<h2>My Complaints</h2>
+          <h2 class="logo">Smart Complaint System</h2>
 
-<table border="1">
+          <ul>
 
-<tr>
-<th>ID</th>
-<th>Name</th>
-<th>Category</th>
-<th>Subject</th>
-<th>Description</th>
-<th>Admin Reply</th>
-<th>Status</th>
-</tr>
+               <li><a href="/">Home</a></li>
+               <li><a href="/about">About</a></li>
+               <li><a href="/contact">Contact</a></li>
 
-{% for complaint in complaints %}
+          </ul>
 
-<tr>
+     </div>
 
-<td>{{ complaint[0] }}</td>
-<td>{{ complaint[1] }}</td>
-<td>{{ complaint[3] }}</td>
-<td>{{ complaint[4] }}</td>
-<td>{{ complaint[5] }}</td>
-<td>{{ complaint[8] }}</td>
+     <h2>My Complaints</h2>
+     <body class="view-complaints-page"></body>
 
-<td>
+     <table border="1">
 
-{% if complaint[6] == "Pending" %}
-<span style="color:red;">Pending</span>
+          <tr>
+               <th>ID</th>
+               <th>Name</th>
+               <th>Category</th>
+               <th>Subject</th>
+               <th>Description</th>
+               <th>Admin Reply</th>
+               <th>Status</th>
+               <th>Action</th>
+          </tr>
 
-{% else %}
-<span style="color:green;">Resolved</span>
+          {% for complaint in complaints %}
 
-{% endif %}
+          <tr>
 
-</td>
+               <td>{{ loop.index }}</td>
+               <td>{{ complaint[1] }}</td>
+               <td>{{ complaint[3] }}</td>
+               <td>{{ complaint[4] }}</td>
+               <td>{{ complaint[5] }}</td>
+               <td>{{ complaint[8] }}</td>
 
-</tr>
+               <td>
 
-{% endfor %}
+                    {% if complaint[6] == "Pending" %}
+                    <span style="color:red;">Pending</span>
 
-</table>
+                    {% else %}
+                    <span style="color:green;">Resolved</span>
 
-<br>
+                    {% endif %}
 
-<a href="/dashboard">
-<button>Back to Dashboard</button>
-</a>
-<footer class="footer">
-<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
-<p>Email: support@complaintsystem.com</p>
-</footer>
+               </td>
+
+               <td>
+                    <a href="/delete/{{ complaint[0] }}"
+                         onclick="return confirm('Are you sure you want to delete this complaint?')">
+                         <button style="background:red;color:white;">Delete</button>
+                    </a>
+               </td>
+
+          </tr>
+
+          {% endfor %}
+
+     </table>
+
+     <br>
+
+     <a href="/dashboard">
+          <button>Back to Dashboard</button>
+     </a>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <br></br>
+     <footer class="footer">
+          <p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+          <p>Email: quickresolve1@gmail.com</p>
+     </footer>
 </body>
+
 </html>

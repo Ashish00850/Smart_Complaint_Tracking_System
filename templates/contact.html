@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
+
 <body>
-<div class="section-container">
-    <h2>Contact Us</h2>
+    <div class="section-container">
+        <h2>Contact Us</h2>
 
-    <div class="contact-info">
-        <p>Email: support@complaintsystem.com</p>
-        <p>Phone: +91 9876543210</p>
+        <div class="contact-info">
+            <p>Email: quickresolve1@gmail.com</p>
+            <p>Phone: +91 9034969471</p>
+        </div>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for msg in messages %}
+        <p style="color:green;">{{ msg }}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/contact" method="POST">
+
+            <input type="text" name="name" placeholder="Your Name" required>
+
+            <input type="email" name="email" placeholder="Your Email" required>
+
+            <textarea name="message" rows="5" placeholder="Your Message" required>
+    </textarea>
+
+            <button type="submit">
+                Send Message
+            </button>
+
+        </form>
     </div>
+    Address: Panipat Institute of Engeneering And Technology, Samalkha <br><br />
 
-    <form class="contact-form">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="5" placeholder="Your Message"></textarea>
-        <button type="submit">Send Message</button>
-    </form>
-</div>
-Address: Panipat Institute of Engeneering And Technology, Samalkha <br><br/>
-
-Working Hours:
-Monday to Friday: 9:00 AM to 4:00 PM
-<footer class="footer">
-<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
-<p>Email: support@complaintsystem.com</p>
-</footer>
+    Working Hours:
+    Monday to Friday: 9:00 AM to 4:00 PM
+    <footer class="footer">
+        <p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+        <p>Email: quickresolve1@gmail.com</p>
+    </footer>
 </body>
+
 </html>

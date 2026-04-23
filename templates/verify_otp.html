@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verify OTP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<body class="otp-page"></body>
+<div class="otp-container">
+    <h2>Verify OTP</h2>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p style="color:red;">{{ msg }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action="/verify_otp" method="POST">
+        <input type="text" name="otp" placeholder="Enter OTP" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+
+    <br>
+
+    <form action="/resend_otp" method="POST">
+        <button type="submit">Resend OTP</button>
+    </form>
+
+    <p id="timer"></p>
+</div>
+
+<script>
+let timeLeft = 600;
+
+let timer = setInterval(function () {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+
+    document.getElementById("timer").innerHTML =
+        "OTP expires in: " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+
+    timeLeft--;
+
+    if (timeLeft < 0) {
+        clearInterval(timer);
+        document.getElementById("timer").innerHTML = "OTP Expired!";
+    }
+}, 1000);
+</script>
+
+</body>
+</html>

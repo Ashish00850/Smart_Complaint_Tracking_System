@@ -8,19 +8,29 @@
 
 <body>
 
-
+    <body class="login-page"></body>
     <h2>Student Registration</h2>
+    {% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+      <p style="color:red; text-align:center;">{{ message }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
     <form action="/register" method="POST">
 
         <label>Name</label><br>
-        <input type="text" name="name" required placeholder="Enter your name"><br><br>
+        <input type="text" name="name" required placeholder="Enter name here"><br><br>
 
         <label>Email</label><br>
-        <input type="email" name="email" required placeholder="Enter your email"><br><br>
+        <input type="email" name="email" required placeholder="Enter email here"><br><br>
+
+        <label>Roll No</label><br>
+        <input type="text" name="roll_no" required placeholder="Enter Roll Number"></br><br>
 
         <label>Phone</label><br>
-        <input type="phone" name="phone" required placeholder="Enter your phone"><br><br>
+        <input type="phone" name="phone" required placeholder="Enter phone number"><br><br>
 
 
         <label>Password</label><br>
@@ -32,12 +42,17 @@
 
     <br>
 
-    <a href="/">Already have an account? Login</a>
+    <a href="/">Already have an account? Login here</a>
 
-<footer class="footer">
-<p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
-<p>Email: support@complaintsystem.com</p>
-</footer>
+    <br><br />
+    <br><br />
+    <br><br />
+    <br><br />
+
+    <footer class="footer">
+        <p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+        <p>Email: quickresolve1@gmail.com</p>
+    </footer>
 
 
 </body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="navbar">
+
+        <h2 class="logo">Smart Complaint System</h2>
+
+        <ul>
+
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/contact">Contact</a></li>
+
+        </ul>
+
+    </div>
+
+    <h2>Admin Dashboard</h2>
+
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Total Complaints</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Pending Complaints</h3>
+            <p>{{ pending }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Resolved Complaints</h3>
+            <p>{{ resolved }}</p>
+        </div>
+
+    </div>
+
+    <br>
+
+    <a href="/admin_view_complaints">
+        <button>View All Complaints</button>
+    </a>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <footer class="footer">
+        <p>© 2026 Smart Complaint Tracking System | All Rights Reserved</p>
+        <p>Email: quickresolve1@gmail.com</p>
+    </footer>
+
+</body>
+
+</html>
