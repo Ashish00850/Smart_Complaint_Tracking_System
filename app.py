@@ -3,6 +3,7 @@ import mysql.connector
 import random
 import smtplib
 import time
+import os
 from email.mime.text import MIMEText
 
 ADMIN_EMAIL = "admin@gmail.com"
@@ -568,5 +569,6 @@ def delete_admin_complaint(id):
     return redirect("/admin_dashboard")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
 
