@@ -14,10 +14,12 @@ app.secret_key = "1623"
 
 # Database connection
 db = mysql.connector.connect(
-    host="localhost",
+    host="shortline.proxy.rlwy.net",
     user="root",
-    password="1623",
-    database="students_complaints")
+    password="MTCboVLqnYEZtFlAHLCasXuGvKUrxGFm",
+    database="railway",
+    port=3306
+    )
 
 cursor = db.cursor()
 
