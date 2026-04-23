@@ -42,6 +42,7 @@ def login():
 
         email = request.form["email"]
         password = request.form["password"]
+        cursor = db.cursor(buffered=True)
 
         query = "SELECT * FROM users WHERE email=%s AND password=%s"
         cursor.execute(query,(email,password))
@@ -409,7 +410,7 @@ def admin_view_complaints():
     if "admin" not in session:
         return redirect("/admin_login")
 
-    cursor = db.cursor()
+    cursor = db.cursor(buffered=True)
 
     query = """
     SELECT 
