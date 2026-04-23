@@ -13,16 +13,19 @@ app = Flask(__name__)
 app.secret_key = "1623"
 
 # Database connection
-db = mysql.connector.connect(
-    host="shortline.proxy.rlwy.net",
-    user="root",
-    password="MTCboVLqnYEZtFlAHLCasXuGvKUrxGFm",
-    database="railway",
-    port=3306
+try:
+    db = mysql.connector.connect(
+        host="shortline.proxy.rlwy.net",
+        user="root",
+        password="MTCboVLqnYEZtFlAHLCasXuGvKUrxGFm",
+        database="railway",
+        port=3306
     )
+    cursor = db.cursor()
+    print("DB Connected Successfully")
 
-cursor = db.cursor()
-
+except Exception as e:
+    print("DB Connection Error:", e)
 # Login page
 @app.route("/")
 def home():
