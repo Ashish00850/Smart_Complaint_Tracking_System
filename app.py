@@ -6,12 +6,21 @@ import time
 import os
 from email.mime.text import MIMEText
 
+
 ADMIN_EMAIL = "admin@gmail.com"
 ADMIN_PASSWORD = "admin123" 
 
 app = Flask(__name__)
 app.secret_key = "1623"
 
+def get_db():
+    return mysql.connector.connect(
+        host="shortline.proxy.rlwy.net",
+        user="root",
+        password="MTCboVLqnYEZtFlAHLCasXuGvKUrxGFm",
+        database="railway",
+        port=3306
+    )
 # Database connection
 try:
     db = mysql.connector.connect(
@@ -21,6 +30,7 @@ try:
         database="railway",
         port=3306
     )
+    db = get_db()
     cursor = db.cursor()
     print("DB Connected Successfully")
 
@@ -93,6 +103,9 @@ def send_otp_email(receiver_email, otp):
 @app.route("/register", methods=["POST"])
 def register():
 
+    db = get_db()
+    cursor = db.cursor()
+
     name = request.form["name"].strip()
     roll_no = request.form["roll_no"].strip()
     email = request.form["email"].strip()
@@ -101,30 +114,27 @@ def register():
 
     # Check authorized student
     cursor.execute(
-    "SELECT * FROM college_students WHERE roll_no=%s AND mobile=%s",
-    (roll_no, phone)
+        "SELECT * FROM college_students WHERE roll_no=%s AND mobile=%s",
+        (roll_no, phone)
     )
 
     student = cursor.fetchone()
-    print("Student found:", student)   # debug
+    print("Student found:", student)
 
     if not student:
         flash("You are not an authorized college student")
         return redirect("/register")
 
+    # Check already registered
     cursor.execute(
-    "SELECT * FROM users WHERE roll_no=%s OR email=%s",
-    (roll_no, email)
+        "SELECT * FROM users WHERE roll_no=%s OR email=%s",
+        (roll_no, email)
     )
 
     existing = cursor.fetchone()
 
     if existing:
-        flash("Student already registered with this roll number or email !")
-        return redirect("/register")
-
-    if existing:
-        flash("This student is already registered")
+        flash("Student already registered with this roll number or email!")
         return redirect("/register")
 
     # Generate OTP
@@ -132,21 +142,17 @@ def register():
     session["otp"] = str(otp)
     session["otp_time"] = time.time()
 
-    # Save data temporarily in session
-    session["otp"] = str(otp)
     session["name"] = name
     session["roll_no"] = roll_no
     session["email"] = email
     session["password"] = password
     session["phone"] = phone
 
-    # Send OTP
     send_otp_email(email, otp)
 
     flash("OTP sent to your email")
     return redirect("/verify_otp")
 
-import time
 
 @app.route("/verify_otp", methods=["GET", "POST"])
 def verify_otp():
@@ -328,7 +334,6 @@ def reset_password():
     "password_success.html",
     message="Password updated successfully! Please login."
     )
-    return render_template("reset_password.html")
 
 
 @app.route("/dashboard")
@@ -386,6 +391,8 @@ def admin_dashboard():
 
 @app.route('/admin_interface')
 def admin_interface():
+
+    db = get_db()
     cursor = db.cursor()
 
     cursor.execute("SELECT COUNT(*) FROM complaints")
@@ -409,6 +416,7 @@ def admin_view_complaints():
 
     if "admin" not in session:
         return redirect("/admin_login")
+    db = get_db()
 
     cursor = db.cursor(buffered=True)
 
@@ -434,6 +442,7 @@ def admin_view_complaints():
 @app.route("/resolve/<int:id>")
 def resolve(id):
 
+    db = get_db()
     cursor = db.cursor()
 
     query = "UPDATE complaints SET status='Resolved' WHERE id=%s"
@@ -478,6 +487,7 @@ def admin_logout():
 @app.route("/reply/<int:id>", methods=["GET","POST"])
 def reply(id):
 
+    db = get_db()
     cursor = db.cursor()
 
     if request.method == "POST":
@@ -554,6 +564,7 @@ Message:
 @app.route('/delete/<int:id>')
 def delete_complaint(id):
 
+    db = get_db()
     cursor = db.cursor()
 
     query = "DELETE FROM complaints WHERE id=%s"
@@ -565,6 +576,7 @@ def delete_complaint(id):
 @app.route('/admin_delete/<int:id>')
 def delete_admin_complaint(id):
 
+    db = get_db()
     cursor = db.cursor()
 
     query = "DELETE FROM complaints WHERE id=%s"
